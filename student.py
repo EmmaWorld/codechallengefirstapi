@@ -86,39 +86,18 @@ def create_student(student: StudentRequest):
     )
 
 
-# @app.patch("/students/{student_id}")
-# def patch_student(student_id: int, patch_data: StudentPatchRequest):
-#     student = session.query(Student).filter(Student.StudentID == student_id).first()
-#     if student:
-#         # Update the Student with the provided patch data
-#         if patch_data.name:
-#             student.Name = patch_data.name
-#         if patch_data.email:
-#             student.Email = patch_data.email
-#         if patch_data.phone:
-#             student.Phone = patch_data.phone
-#         if patch_data.address:
-#             student.Address = patch_data.address
-
-#         session.commit()
-
-#         return {"message": "Student updated successfully"}
-#     else:
-#         raise HTTPException(status_code=404, detail="Student not found")
-
-
 @app.patch("/students/{student_id}")
 def patch_student(student_id: int, patch_data: StudentPatchRequest):
     student = session.query(Student).filter(Student.StudentID == student_id).first()
     if student:
         # Update the Student with the provided patch data
-        if patch_data.name is not None:
+        if patch_data.name:
             student.Name = patch_data.name
-        if patch_data.email is not None:
+        if patch_data.email:
             student.Email = patch_data.email
-        if patch_data.phone is not None:
+        if patch_data.phone:
             student.Phone = patch_data.phone
-        if patch_data.address is not None:
+        if patch_data.address:
             student.Address = patch_data.address
 
         session.commit()
@@ -126,3 +105,24 @@ def patch_student(student_id: int, patch_data: StudentPatchRequest):
         return {"message": "Student updated successfully"}
     else:
         raise HTTPException(status_code=404, detail="Student not found")
+
+
+# @app.patch("/students/{student_id}")
+# def patch_student(student_id: int, patch_data: StudentPatchRequest):
+#     student = session.query(Student).filter(Student.StudentID == student_id).first()
+#     if student:
+#         # Update the Student with the provided patch data
+#         if patch_data.name is not None:
+#             student.Name = patch_data.name
+#         if patch_data.email is not None:
+#             student.Email = patch_data.email
+#         if patch_data.phone is not None:
+#             student.Phone = patch_data.phone
+#         if patch_data.address is not None:
+#             student.Address = patch_data.address
+
+#         session.commit()
+
+#         return {"message": "Student updated successfully"}
+#     else:
+#         raise HTTPException(status_code=404, detail="Student not found")
